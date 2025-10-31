@@ -19,7 +19,7 @@
 </header>
 
 <nav class="mt-4 mb-6">
-  <ul class="flex flex-col md:flex-row gap-2 md:gap-4">
+  <ul class="flex flex-row flex-wrap gap-2 md:gap-4">
     <li><button on:click={() => setSection('home')} class="text-sm {currentSection === 'home' ? 'underline' : ''}">Home</button></li>
     <li><button on:click={() => setSection('blog')} class="text-sm {currentSection === 'blog' ? 'underline' : ''}">Blog</button></li>
     <li><button on:click={() => setSection('about')} class="text-sm {currentSection === 'about' ? 'underline' : ''}">About</button></li>
