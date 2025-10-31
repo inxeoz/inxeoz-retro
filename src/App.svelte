@@ -4,10 +4,12 @@
   import BlogCard from './lib/BlogCard.svelte';
   import CodeBlock from './lib/CodeBlock.svelte';
   import Footer from './lib/Footer.svelte';
+  import { marked } from 'marked';
 
   let currentSection = 'home';
   let selectedPost = null;
   let activeFavTab = 'YOUTBERS';
+  let showAnimal = false;
 
   const projects = [
     {
@@ -38,14 +40,10 @@
   ];
 
   const blogPosts = [
-    {title: 'Welcome to my blog', excerpt: 'Small notes and experiments with retro UI.', date: '2023-11-01', content: [{type: 'text', value: 'This is the full content of the welcome post. Here I talk about starting this blog and my experiments with retro UI designs. It\'s all about creating tactile, monochrome layouts that feel good to interact with.'}]},
-    {title: 'Designing with monochrome', excerpt: 'How black and white can create tactile layouts.', date: '2023-10-15', content: [{type: 'text', value: 'Monochrome design isn\'t just about aesthetics—it\'s about focus and usability. By removing color distractions, we can create interfaces that emphasize form, texture, and interaction. This post explores techniques for making black and white designs engaging.'}]},
-    {title: 'Svelte for portfolios', excerpt: 'Why I chose Svelte for this project.', date: '2023-09-20', content: [{type: 'text', value: 'Svelte offers a unique approach to building web apps with its compile-time optimization. For a portfolio site, this means fast loading times and smooth interactions. I chose Svelte because it allows me to write less code while achieving more performance.'}]},
-    {title: 'Setting up a Svelte project', excerpt: 'Quick guide to getting started with Svelte.', date: '2023-10-05', content: [
-      {type: 'text', value: 'To create a new Svelte project, run the following commands:'},
-      {type: 'code', value: 'npx create-svelte@latest my-app\ncd my-app\nnpm install\nnpm run dev', lang: 'bash'},
-      {type: 'text', value: 'This will set up a basic Svelte app with Vite. For more options, check the Svelte docs.'}
-    ]}
+    {title: 'Welcome to my blog', excerpt: 'Small notes and experiments with retro UI.', date: '2023-11-01', content: 'This is the full content of the welcome post. Here I talk about starting this blog and my experiments with retro UI designs. It\'s all about creating tactile, monochrome layouts that feel good to interact with.'},
+    {title: 'Designing with monochrome', excerpt: 'How black and white can create tactile layouts.', date: '2023-10-15', content: 'Monochrome design isn\'t just about aesthetics—it\'s about focus and usability. By removing color distractions, we can create interfaces that emphasize form, texture, and interaction. This post explores techniques for making black and white designs engaging.'},
+    {title: 'Svelte for portfolios', excerpt: 'Why I chose Svelte for this project.', date: '2023-09-20', content: 'Svelte offers a unique approach to building web apps with its compile-time optimization. For a portfolio site, this means fast loading times and smooth interactions. I chose Svelte because it allows me to write less code while achieving more performance.'},
+    {title: 'Setting up a Svelte project', excerpt: 'Quick guide to getting started with Svelte.', date: '2023-10-05', content: 'To create a new Svelte project, run the following commands:\n\n```bash\nnpx create-svelte@latest my-app\ncd my-app\nnpm install\nnpm run dev\n```\n\nThis will set up a basic Svelte app with Vite. For more options, check the Svelte docs.'}
   ];
 
   const favContent = {
@@ -78,7 +76,7 @@
 
   function setSection(section) {
     currentSection = section;
-    selectedPost = null; // Reset when switching sections
+    selectedPost = null;
   }
 
   function selectPost(post) {
@@ -90,7 +88,10 @@
   }
 </script>
 
+
+
 <div class="container-retro">
+  <div class="pin-icon">📌</div>
   <Header {currentSection} {setSection} />
 
   {#if currentSection === 'home'}
@@ -114,14 +115,8 @@
         <div class="card-blogs p-6">
           <h3 class="text-xl font-bold mb-2">{selectedPost.title}</h3>
           <p class="text-sm text-gray-600 mb-4">{selectedPost.date}</p>
-          <div class="text-base leading-relaxed">
-            {#each selectedPost.content as block}
-              {#if block.type === 'text'}
-                <p class="mb-4">{block.value}</p>
-              {:else if block.type === 'code'}
-                <CodeBlock code={block.value} lang={block.lang} />
-              {/if}
-            {/each}
+          <div class="text-base leading-relaxed prose prose-sm max-w-none">
+            {@html marked(selectedPost.content)}
           </div>
         </div>
       {:else}

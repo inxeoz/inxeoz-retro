@@ -10,7 +10,17 @@
 body{
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   background: var(--bw-bg);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="paper"><feTurbulence baseFrequency="0.3" numOctaves="4"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="gamma" amplitude="0.3" exponent="1"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(%23paper)" opacity="0.8"/></svg>');
+  background-repeat: repeat;
+  background-size: 100px 100px;
   color: var(--bw-fg);
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: 2rem;
+  }
 }
 
 /* Retro frame */
@@ -18,18 +28,39 @@ body{
   max-width: 1100px;
   margin: 1rem auto 2rem;
   border: 3px solid #000;
-  padding: 0.75rem;
+  padding: 0.5rem;
   border-radius: 0;
   box-shadow: 0 5px 0 rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.pin-icon {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  font-size: 1.5rem;
+  z-index: 5;
+}
+
+@media (max-width: 767px) {
+  .pin-icon {
+    display: none;
+  }
 }
 
 @media (min-width: 768px) {
   .container-retro {
-    margin: 2rem auto;
+    margin: 3rem auto 4rem;
     border: 6px solid #000;
     padding: 1.25rem;
     border-radius: 0;
     box-shadow: 0 10px 0 rgba(0,0,0,0.05);
+  }
+
+  .pin-icon {
+    top: 1rem;
+    left: 1rem;
+    font-size: 2rem;
   }
 }
 
@@ -85,6 +116,19 @@ body{
   padding:0.25rem 0.5rem;
   border-radius:0;
   font-size:0.85rem;
+}
+
+
+
+@media (max-width: 767px) {
+  .animal-container {
+    display: none;
+  }
+}
+
+.animal-svg {
+  width: 80px;
+  height: 80px;
 }
 
 /* Code highlighting */
