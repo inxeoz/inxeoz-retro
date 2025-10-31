@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bw-bg: #ffffff;
+  --bw-fg: #0b0b0b;
+}
+
+body{
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: var(--bw-bg);
+  color: var(--bw-fg);
+}
+
+/* Retro frame */
+.container-retro{
+  max-width: 1100px;
+  margin: 1rem auto 2rem;
+  border: 3px solid #000;
+  padding: 0.75rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 0 rgba(0,0,0,0.05);
+}
+
+@media (min-width: 768px) {
+  .container-retro {
+    margin: 2rem auto;
+    border: 6px solid #000;
+    padding: 1.25rem;
+    border-radius: 18px;
+    box-shadow: 0 10px 0 rgba(0,0,0,0.05);
+  }
+}
+
+.header-hero{
+  display:flex;
+  gap:1.25rem;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.hero-title{
+  font-size:2.25rem;
+  font-weight:700;
+  letter-spacing: -0.02em;
+}
+
+.mascot{
+  width:160px;
+  height:160px;
+  background: linear-gradient(180deg,#fff,#eee);
+  border:3px solid #000;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card-bw{
+  border:3px solid #000;
+  padding:1rem;
+  background: repeating-conic-gradient(#fff 0% 25%, #f7f7f7 0% 50%);
+}
+
+.project-thumbnail{
+  filter: grayscale(100%);
+}
+
+/* small playful accent */
+.illustr-accent{
+  background: var(--retro, #fbbca4);
+  padding:0.25rem 0.5rem;
+  border-radius:6px;
+  font-size:0.85rem;
+}
