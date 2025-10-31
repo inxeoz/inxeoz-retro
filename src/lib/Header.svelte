@@ -9,12 +9,7 @@
     <p class="illustr-accent">a small portfolio with a retro twist</p>
   </div>
   <div class="mascot w-32 h-32 md:w-40 md:h-40">
-    <!-- placeholder for mascot illustration -->
-    <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <rect x="6" y="6" width="88" height="88" fill="#fff" stroke="#000" stroke-width="4" rx="10" />
-      <circle cx="50" cy="45" r="14" fill="#000" />
-      <rect x="30" y="68" width="40" height="8" fill="#000" />
-    </svg>
+    <img src="https://avatars.githubusercontent.com/inxeoz" alt="mascot" class="w-full h-full object-cover rounded-xl" />
   </div>
 </header>
 

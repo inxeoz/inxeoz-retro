@@ -139,7 +139,7 @@
     <section class="mt-6">
       <h2 class="text-2xl font-bold">About</h2>
       <div class="mt-4 card-bw p-4 flex flex-col md:flex-row gap-4">
-      <div class="w-24 h-24 md:w-28 md:h-28 border-2 border-black rounded-xl flex items-center justify-center mx-auto md:mx-0" style="border-width: 3px;">avatar</div>
+      <img src="https://avatars.githubusercontent.com/inxeoz" alt="avatar" class="w-24 h-24 md:w-28 md:h-28 border-2 border-black rounded-xl mx-auto md:mx-0" style="border-width: 3px;" />
       <div>
         <p>I am Purushottam, software developer, designer, research enthusiast...</p>
         <p>Even I don't know myself—what the hell am I?</p>
