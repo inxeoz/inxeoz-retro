@@ -2,6 +2,7 @@
   import Header from './lib/Header.svelte';
   import ProjectCard from './lib/ProjectCard.svelte';
   import BlogCard from './lib/BlogCard.svelte';
+  import CodeBlock from './lib/CodeBlock.svelte';
   import Footer from './lib/Footer.svelte';
 
   let currentSection = 'home';
@@ -37,9 +38,14 @@
   ];
 
   const blogPosts = [
-    {title: 'Welcome to my blog', excerpt: 'Small notes and experiments with retro UI.', date: '2023-11-01', content: 'This is the full content of the welcome post. Here I talk about starting this blog and my experiments with retro UI designs. It\'s all about creating tactile, monochrome layouts that feel good to interact with.'},
-    {title: 'Designing with monochrome', excerpt: 'How black and white can create tactile layouts.', date: '2023-10-15', content: 'Monochrome design isn\'t just about aesthetics—it\'s about focus and usability. By removing color distractions, we can create interfaces that emphasize form, texture, and interaction. This post explores techniques for making black and white designs engaging.'},
-    {title: 'Svelte for portfolios', excerpt: 'Why I chose Svelte for this project.', date: '2023-09-20', content: 'Svelte offers a unique approach to building web apps with its compile-time optimization. For a portfolio site, this means fast loading times and smooth interactions. I chose Svelte because it allows me to write less code while achieving more performance.'}
+    {title: 'Welcome to my blog', excerpt: 'Small notes and experiments with retro UI.', date: '2023-11-01', content: [{type: 'text', value: 'This is the full content of the welcome post. Here I talk about starting this blog and my experiments with retro UI designs. It\'s all about creating tactile, monochrome layouts that feel good to interact with.'}]},
+    {title: 'Designing with monochrome', excerpt: 'How black and white can create tactile layouts.', date: '2023-10-15', content: [{type: 'text', value: 'Monochrome design isn\'t just about aesthetics—it\'s about focus and usability. By removing color distractions, we can create interfaces that emphasize form, texture, and interaction. This post explores techniques for making black and white designs engaging.'}]},
+    {title: 'Svelte for portfolios', excerpt: 'Why I chose Svelte for this project.', date: '2023-09-20', content: [{type: 'text', value: 'Svelte offers a unique approach to building web apps with its compile-time optimization. For a portfolio site, this means fast loading times and smooth interactions. I chose Svelte because it allows me to write less code while achieving more performance.'}]},
+    {title: 'Setting up a Svelte project', excerpt: 'Quick guide to getting started with Svelte.', date: '2023-10-05', content: [
+      {type: 'text', value: 'To create a new Svelte project, run the following commands:'},
+      {type: 'code', value: 'npx create-svelte@latest my-app\ncd my-app\nnpm install\nnpm run dev', lang: 'bash'},
+      {type: 'text', value: 'This will set up a basic Svelte app with Vite. For more options, check the Svelte docs.'}
+    ]}
   ];
 
   const favContent = {
@@ -108,7 +114,15 @@
         <div class="card-bw p-6">
           <h3 class="text-xl font-bold mb-2">{selectedPost.title}</h3>
           <p class="text-sm text-gray-600 mb-4">{selectedPost.date}</p>
-          <p class="text-base leading-relaxed">{selectedPost.content}</p>
+          <div class="text-base leading-relaxed">
+            {#each selectedPost.content as block}
+              {#if block.type === 'text'}
+                <p class="mb-4">{block.value}</p>
+              {:else if block.type === 'code'}
+                <CodeBlock code={block.value} lang={block.lang} />
+              {/if}
+            {/each}
+          </div>
         </div>
       {:else}
         <h2 class="text-2xl font-bold">Blog</h2>
