@@ -4,12 +4,13 @@
   import BlogCard from './lib/BlogCard.svelte';
   import CodeBlock from './lib/CodeBlock.svelte';
   import Footer from './lib/Footer.svelte';
-  import { marked } from 'marked';
+  import { onMount } from 'svelte';
 
   let currentSection = 'home';
   let selectedPost = null;
   let activeFavTab = 'YOUTBERS';
   let showAnimal = false;
+  let blogPosts = [];
 
   const projects = [
     {
@@ -39,12 +40,29 @@
     }
   ];
 
-  const blogPosts = [
-    {title: 'Welcome to my blog', excerpt: 'Small notes and experiments with retro UI.', date: '2023-11-01', content: 'This is the full content of the welcome post. Here I talk about starting this blog and my experiments with retro UI designs. It\'s all about creating tactile, monochrome layouts that feel good to interact with.'},
-    {title: 'Designing with monochrome', excerpt: 'How black and white can create tactile layouts.', date: '2023-10-15', content: 'Monochrome design isn\'t just about aesthetics—it\'s about focus and usability. By removing color distractions, we can create interfaces that emphasize form, texture, and interaction. This post explores techniques for making black and white designs engaging.'},
-    {title: 'Svelte for portfolios', excerpt: 'Why I chose Svelte for this project.', date: '2023-09-20', content: 'Svelte offers a unique approach to building web apps with its compile-time optimization. For a portfolio site, this means fast loading times and smooth interactions. I chose Svelte because it allows me to write less code while achieving more performance.'},
-    {title: 'Setting up a Svelte project', excerpt: 'Quick guide to getting started with Svelte.', date: '2023-10-05', content: 'To create a new Svelte project, run the following commands:\n\n```bash\nnpx create-svelte@latest my-app\ncd my-app\nnpm install\nnpm run dev\n```\n\nThis will set up a basic Svelte app with Vite. For more options, check the Svelte docs.'}
-  ];
+  onMount(async () => {
+    try {
+      const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@inxeoz');
+      const data = await res.json();
+      blogPosts = data.items.map(item => ({
+        title: item.title,
+        excerpt: stripHtml(item.description).slice(0, 150) + '...',
+        date: item.pubDate.split(' ')[0],
+        content: item.content,
+        link: item.link
+      }));
+    } catch (error) {
+      console.error('Failed to fetch blog posts:', error);
+      // Fallback to empty or default posts
+      blogPosts = [];
+    }
+  });
+
+  function stripHtml(html) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || '';
+  }
 
   const favContent = {
     YOUTBERS: [
@@ -113,12 +131,17 @@
           <button on:click={backToBlog} class="text-sm underline">← Back to Blog</button>
         </div>
         <div class="card-blogs p-6">
-          <h3 class="text-xl font-bold mb-2">{selectedPost.title}</h3>
-          <p class="text-sm text-gray-600 mb-4">{selectedPost.date}</p>
-          <div class="text-base leading-relaxed prose prose-sm max-w-none">
-            {@html marked(selectedPost.content)}
-          </div>
-        </div>
+           <h3 class="text-xl font-bold mb-2">{selectedPost.title}</h3>
+           <p class="text-sm text-gray-600 mb-4">{selectedPost.date}</p>
+           <div class="text-base leading-relaxed prose prose-sm max-w-none">
+             {@html selectedPost.content}
+           </div>
+           {#if selectedPost.link}
+             <div class="mt-4">
+               <a href={selectedPost.link} target="_blank" rel="noopener" class="text-blue-600 underline">Read on Medium</a>
+             </div>
+           {/if}
+         </div>
       {:else}
         <h2 class="text-2xl font-bold">Blog</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-4">
