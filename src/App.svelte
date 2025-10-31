@@ -6,10 +6,33 @@
 
   let currentSection = 'home';
   let selectedPost = null;
+  let activeFavTab = 'YOUTBERS';
 
   const projects = [
-    {title: 'Possimus', description: 'Retro layout experiment.', image: '/images/proj1.jpg'},
-    {title: 'Dolorum', description: 'Black & white photo series', image: '/images/proj2.jpg'}
+    {
+      title: 'CHAK A VERSION CONTROL SYSTEM',
+      description: 'I tried to build a version control system in Rust inspired by Git. Although it\'s not complete, it is easily understandable and extendable',
+      link: 'https://github.com/inxeoz/chak',
+      skills: ['svelte', 'penpot', 'nodejs', 'rust']
+    },
+    {
+      title: 'MUSIC ARTIST VARN\'S PORTFOLIO',
+      description: 'It\'s kind of a personal project. In this project, I built a portfolio for my friend Varn. He is a music artist and dancer, currently in the early stage of his career. So, this project is a kind of gift to him',
+      link: 'https://varn.inxeoz.com/',
+      skills: ['svelte', 'penpot', 'nodejs', 'aws']
+    },
+    {
+      title: 'BRAINFLEX MATHEMATICAL EQ. BASED GAME',
+      description: 'As a fun project, I started Brainflex. At that time, I had no experience with game development, so I began learning the Godot engine and started building games. Brainflex is a result of that learning process',
+      link: 'https://github.com/inxeoz/brainFlex',
+      skills: ['godot engine', 'godot script', 'android development', 'game development']
+    },
+    {
+      title: 'Phonetic converter using RUST -> WASM -> JS',
+      description: 'I wanted to improve my English pronunciation, so I needed a site that converts English words to IPA. Although there are many sites available with this functionality, I wanted to implement my own. The frontend part is not complete yet, but the Penpot design has been finished.',
+      link: 'https://github.com/inxeoz/svelte_phonetic',
+      skills: ['svelte', 'WASM', 'RUST', 'nodejs']
+    }
   ];
 
   const blogPosts = [
@@ -17,6 +40,34 @@
     {title: 'Designing with monochrome', excerpt: 'How black and white can create tactile layouts.', date: '2023-10-15', content: 'Monochrome design isn\'t just about aesthetics—it\'s about focus and usability. By removing color distractions, we can create interfaces that emphasize form, texture, and interaction. This post explores techniques for making black and white designs engaging.'},
     {title: 'Svelte for portfolios', excerpt: 'Why I chose Svelte for this project.', date: '2023-09-20', content: 'Svelte offers a unique approach to building web apps with its compile-time optimization. For a portfolio site, this means fast loading times and smooth interactions. I chose Svelte because it allows me to write less code while achieving more performance.'}
   ];
+
+  const favContent = {
+    YOUTBERS: [
+      {text: 'PHYSICS VIDEOS BY EUGENE KHUTORYANSKY', url: 'https://www.youtube.com/@EugeneKhutoryansky'},
+      {text: 'ALAN BECKER', url: 'https://www.youtube.com/@alanbecker'},
+      {text: 'BRANCH EDUCATION', url: 'https://www.youtube.com/@BranchEducation'},
+      {text: 'KHAN ACADEMY', url: 'https://www.youtube.com/@khanacademy'},
+      {text: '3B1B', url: 'https://www.youtube.com/@3blue1brown'},
+      {text: 'VERITASIUM', url: 'https://www.youtube.com/@veritasium'},
+      {text: 'LESICS', url: 'https://www.youtube.com/@SabinCivil'},
+      {text: 'SARTHAK GOSWAMI', url: 'https://www.youtube.com/@SundaySarthak'}
+    ],
+    'SITE:S': [
+      {text: 'mathsisfun.com', url: 'https://www.mathsisfun.com/'},
+      {text: 'egyankosh.ac.in', url: 'https://egyankosh.ac.in/handle/123456789/17990?mode=full'},
+      {text: 'zerotomastery.io', url: 'https://zerotomastery.io/'},
+      {text: 'osdev.org', url: 'https://wiki.osdev.org/Expanded_Main_Page'},
+      {text: 'dogl.app', url: 'https://www.dogl.app/'}
+    ],
+    QUOTES: [
+      ' "EACH AND EVERY TYPE OF PROBLEM HAS ALWAYS A SOLUTION" ',
+      ' "YOU CAN\'T BE ONLINE EVERY TIME , BE READY FOR OFFLINE MODE" ',
+      ' "KEEP BREATHING , TIDE WILL COME TAKE SOMEWHERE ; DON\'T GIVE UP" '
+    ].map(q => ({text: q, url: `https://www.google.com/search?q=${encodeURIComponent(q)}`})),
+    BOOKS: ['Gunaho Ka Devta', 'The Mastery Of Love [READING]'].map(q => ({text: q, url: `https://www.google.com/search?q=book: ${encodeURIComponent(q)}`}))
+  };
+
+  const favTabs = Object.keys(favContent);
 
   function setSection(section) {
     currentSection = section;
@@ -73,10 +124,11 @@
     <section class="mt-6">
       <h2 class="text-2xl font-bold">About</h2>
       <div class="mt-4 card-bw p-4 flex flex-col md:flex-row gap-4">
-        <div class="w-24 h-24 md:w-28 md:h-28 border-2 border-black rounded-xl flex items-center justify-center mx-auto md:mx-0" style="border-width: 3px;">avatar</div>
-        <div>
-          <p>Hi — I'm Inxeoz, a maker who likes retro UI, tactile layouts and small interactive experiments. I combine monochrome structure with friendly illustrated accents.</p>
-        </div>
+      <div class="w-24 h-24 md:w-28 md:h-28 border-2 border-black rounded-xl flex items-center justify-center mx-auto md:mx-0" style="border-width: 3px;">avatar</div>
+      <div>
+        <p>I am Purushottam, software developer, designer, research enthusiast...</p>
+        <p>Even I don't know myself—what the hell am I?</p>
+      </div>
       </div>
     </section>
   {/if}
@@ -86,7 +138,34 @@
       <h2 class="text-2xl font-bold">Contact</h2>
       <div class="mt-4 card-bw p-4">
         <p>Email: <a href="mailto:hello@inxeoz.com">hello@inxeoz.com</a></p>
-        <p class="mt-2">Social: <a href="#">Twitter</a> · <a href="#">GitHub</a></p>
+        <p class="mt-2">Social: <a href="https://github.com/inxeoz/">GitHub</a> · <a href="https://dribbble.com/inxeoz">Dribbble</a> · <a href="https://www.linkedin.com/in/purushottam-singram/">LinkedIn</a> · <a href="https://medium.com/@inxeoz">Medium</a></p>
+      </div>
+    </section>
+  {/if}
+
+  {#if currentSection === 'favorites'}
+    <section class="mt-6">
+      <h2 class="text-2xl font-bold">Favorites</h2>
+      <div class="mt-4">
+        <div class="flex flex-wrap gap-2 mb-4">
+          {#each favTabs as tab}
+            <button
+              class="px-3 py-2 border-2 {activeFavTab === tab ? 'bg-black text-white' : ''}"
+              on:click={() => activeFavTab = tab}
+            >
+              {tab}
+            </button>
+          {/each}
+        </div>
+        <div class="card-bw p-4">
+          <div class="flex flex-col gap-2">
+            {#each favContent[activeFavTab] as item}
+              <a href={item.url} target="_blank" rel="noopener" class="text-blue-600 underline hover:text-blue-800">
+                {item.text}
+              </a>
+            {/each}
+          </div>
+        </div>
       </div>
     </section>
   {/if}
