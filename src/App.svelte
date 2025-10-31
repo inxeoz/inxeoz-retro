@@ -111,7 +111,7 @@
           <h2 class="text-2xl font-bold">Blog</h2>
           <button on:click={backToBlog} class="text-sm underline">← Back to Blog</button>
         </div>
-        <div class="card-bw p-6">
+        <div class="card-blogs p-6">
           <h3 class="text-xl font-bold mb-2">{selectedPost.title}</h3>
           <p class="text-sm text-gray-600 mb-4">{selectedPost.date}</p>
           <div class="text-base leading-relaxed">
@@ -151,7 +151,7 @@
   {#if currentSection === 'contact'}
     <section class="mt-6">
       <h2 class="text-2xl font-bold">Contact</h2>
-      <div class="mt-4 card-bw p-4">
+      <div class="mt-4 card-blogs p-4">
         <p>Email: <a href="mailto:hello@inxeoz.com">hello@inxeoz.com</a></p>
         <p class="mt-2">Social: <a href="https://github.com/inxeoz/">GitHub</a> · <a href="https://dribbble.com/inxeoz">Dribbble</a> · <a href="https://www.linkedin.com/in/purushottam-singram/">LinkedIn</a> · <a href="https://medium.com/@inxeoz">Medium</a></p>
       </div>

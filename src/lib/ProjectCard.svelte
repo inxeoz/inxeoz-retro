@@ -6,7 +6,7 @@
   export let skills = [];
 </script>
 
-<article class="card-bw">
+  <article class="card-projects">
   <h3 class="font-bold text-lg">{title}</h3>
   <p class="mt-2 text-sm">{description}</p>
   {#if skills.length > 0}
