@@ -9,7 +9,7 @@
     <p class="illustr-accent">a small portfolio with a retro twist</p>
   </div>
   <div class="mascot w-32 h-32 md:w-40 md:h-40">
-    <img src="https://avatars.githubusercontent.com/inxeoz" alt="mascot" class="w-full h-full object-cover rounded-xl" />
+    <img src="https://avatars.githubusercontent.com/inxeoz" alt="mascot" class="w-full h-full object-cover rounded-none" />
   </div>
 </header>
 
