@@ -12,25 +12,26 @@
     {
       title: 'CHAK A VERSION CONTROL SYSTEM',
       description: 'I tried to build a version control system in Rust inspired by Git. Although it\'s not complete, it is easily understandable and extendable',
-      link: 'https://github.com/inxeoz/chak',
+      codeLink: 'https://github.com/inxeoz/chak',
       skills: ['svelte', 'penpot', 'nodejs', 'rust']
     },
     {
       title: 'MUSIC ARTIST VARN\'S PORTFOLIO',
       description: 'It\'s kind of a personal project. In this project, I built a portfolio for my friend Varn. He is a music artist and dancer, currently in the early stage of his career. So, this project is a kind of gift to him',
-      link: 'https://varn.inxeoz.com/',
+      siteLink: 'https://varn.inxeoz.com/',
+      codeLink: 'https://github.com/inxeoz/varn_proj',
       skills: ['svelte', 'penpot', 'nodejs', 'aws']
     },
     {
       title: 'BRAINFLEX MATHEMATICAL EQ. BASED GAME',
       description: 'As a fun project, I started Brainflex. At that time, I had no experience with game development, so I began learning the Godot engine and started building games. Brainflex is a result of that learning process',
-      link: 'https://github.com/inxeoz/brainFlex',
+      codeLink: 'https://github.com/inxeoz/brainFlex',
       skills: ['godot engine', 'godot script', 'android development', 'game development']
     },
     {
       title: 'Phonetic converter using RUST -> WASM -> JS',
       description: 'I wanted to improve my English pronunciation, so I needed a site that converts English words to IPA. Although there are many sites available with this functionality, I wanted to implement my own. The frontend part is not complete yet, but the Penpot design has been finished.',
-      link: 'https://github.com/inxeoz/svelte_phonetic',
+      codeLink: 'https://github.com/inxeoz/svelte_phonetic',
       skills: ['svelte', 'WASM', 'RUST', 'nodejs']
     }
   ];
@@ -91,7 +92,7 @@
       <h2 class="text-2xl font-bold">Projects</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-4">
         {#each projects as p}
-          <ProjectCard title={p.title} description={p.description} image={p.image} />
+          <ProjectCard title={p.title} description={p.description} codeLink={p.codeLink} siteLink={p.siteLink} skills={p.skills} />
         {/each}
       </div>
     </section>
