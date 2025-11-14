@@ -1,16 +1,12 @@
 <script>
   import Header from './lib/Header.svelte';
   import ProjectCard from './lib/ProjectCard.svelte';
-  import BlogCard from './lib/BlogCard.svelte';
-  import CodeBlock from './lib/CodeBlock.svelte';
   import Footer from './lib/Footer.svelte';
   import { onMount } from 'svelte';
 
   let currentSection = 'home';
-  let selectedPost = null;
   let activeFavTab = 'YOUTBERS';
-  let showAnimal = false;
-  let blogPosts = [];
+
 
   const projects = [
     {
@@ -39,24 +35,6 @@
       skills: ['svelte', 'WASM', 'RUST', 'nodejs']
     }
   ];
-
-  onMount(async () => {
-    try {
-      const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@inxeoz');
-      const data = await res.json();
-      blogPosts = data.items.map(item => ({
-        title: item.title,
-        excerpt: stripHtml(item.description).slice(0, 150) + '...',
-        date: item.pubDate.split(' ')[0],
-        content: item.content,
-        link: item.link
-      }));
-    } catch (error) {
-      console.error('Failed to fetch blog posts:', error);
-      // Fallback to empty or default posts
-      blogPosts = [];
-    }
-  });
 
   function stripHtml(html) {
     const tmp = document.createElement('div');
@@ -124,33 +102,8 @@
   {/if}
 
   {#if currentSection === 'blog'}
-    <section class="mt-6">
-      {#if selectedPost}
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-2xl font-bold">Blog</h2>
-          <button on:click={backToBlog} class="text-sm underline">← Back to Blog</button>
-        </div>
-        <div class="card-blogs p-6">
-           <h3 class="text-xl font-bold mb-2">{selectedPost.title}</h3>
-           <p class="text-sm text-gray-600 mb-4">{selectedPost.date}</p>
-           <div class="text-base leading-relaxed prose prose-sm max-w-none">
-             {@html selectedPost.content}
-           </div>
-           {#if selectedPost.link}
-             <div class="mt-4">
-               <a href={selectedPost.link} target="_blank" rel="noopener" class="text-blue-600 underline">Read on Medium</a>
-             </div>
-           {/if}
-         </div>
-      {:else}
-        <h2 class="text-2xl font-bold">Blog</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-4">
-          {#each blogPosts as post}
-            <BlogCard title={post.title} excerpt={post.excerpt} date={post.date} onClick={() => selectPost(post)} />
-          {/each}
-        </div>
-      {/if}
-    </section>
+      <h2 class="text-2xl font-bold">Blog</h2>
+      <a href="/blog">inxeoz.github.io/blog</a>
   {/if}
 
   {#if currentSection === 'about'}
