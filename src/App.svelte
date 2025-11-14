@@ -103,7 +103,7 @@
 
   {#if currentSection === 'blog'}
       <h2 class="text-2xl font-bold">Blog</h2>
-      <a href="/blog">inxeoz.github.io/blog</a>
+      <a href="https://inxeoz.github.io/blog" target="_blank" rel="noopener noreferrer">inxeoz.github.io/blog</a>
   {/if}
 
   {#if currentSection === 'about'}
