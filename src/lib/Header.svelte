@@ -6,7 +6,7 @@
 <header class="header-hero flex flex-col md:flex-row gap-4 md:gap-5 items-center justify-between">
   <div>
     <h1 class="hero-title text-2xl md:text-3xl">Hello. I'm <span style="text-decoration:underline">Purushottam</span>.</h1>
-    <p class="illustr-accent">a small portfolio with a retro twist</p>
+    <p class="illustr-accent">inxeoz [ /ˈɪn-zē-ōz — IN-zee-ohz ]</p>
   </div>
   <div class="mascot w-32 h-32 md:w-40 md:h-40">
     <img src="https://avatars.githubusercontent.com/inxeoz" alt="mascot" class="w-full h-full object-cover rounded-none" />
